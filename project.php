@@ -9,6 +9,7 @@
     }
 
     $userEmail = $_SESSION["email"];
+$project_id = $_GET['project_id'];
     $checkCompanyQuery = "SELECT c.*, s.Student_ID 
                         FROM company_registration c
                         INNER JOIN student_registration s ON c.Student_ID = s.Student_ID
