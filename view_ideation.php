@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Teacher</title>
+		<link rel="icon" href="/launchpad/images/favicon.svg" />
     <style media="screen">
         embed {
             border: 2px solid black;

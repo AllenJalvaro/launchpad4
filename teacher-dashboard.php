@@ -23,7 +23,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Teacher</title>
+    <title>Home</title>
+		<link rel="icon" href="/launchpad/images/favicon.svg" />
     <style media="screen">
       embed{
         border: 2px solid black;
@@ -91,7 +92,7 @@
     <?php
     $sql = "SELECT p.Project_title, i.Project_logo, i.IdeationID
             FROM project p
-            JOIN ideation_phase i ON p.Project_ID = i.Project_ID";
+            JOIN ideation_phase i ON p.Project_ID = i.Project_ID ORDER BY i.ideationid DESC";
 
     $result = $conn->query($sql);
     ?>

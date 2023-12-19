@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2023 at 12:25 AM
+-- Generation Time: Dec 19, 2023 at 02:37 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `launchpad`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -41,9 +53,8 @@ CREATE TABLE `company_registration` (
 --
 
 INSERT INTO `company_registration` (`Company_ID`, `Student_ID`, `Company_name`, `Company_logo`, `Company_description`, `Registration_date`) VALUES
-(69, '22-UR-0007', 'SmartCo', 'images/657607840f43f.jpg', 'SmartCo Description', '2023-12-11 02:46:28'),
-(70, '21-UR-0123', 'Globe', 'images/657607e48efb1.jpg', 'Globe Description', '2023-12-11 02:48:04'),
-(72, '23-UR-0987', 'TnT', 'images/6576482ba4762.jpg', 'desc', '2023-12-11 07:22:19');
+(77, '22-UR-0007', 'ByteBurst Tech', 'images/658018bcccfe9.jpg', 'ByteBurst Tech is a dynamic startup focused on revolutionizing the tech landscape. We specialize in developing streamlined software solutions that propel businesses forward. With a passion for efficiency and a commitment to simplicity, ByteBurst Tech aims to empower organizations through innovative and user-centric digital experiences. Embrace the future with ByteBurst Tech — where bytes meet brilliance!', '2023-12-18 18:02:36'),
+(78, '22-UR-0007', 'StellarCraft Innovations', 'images/658019737fd43.jpg', 'StellarCraft Innovations is a forward-thinking startup dedicated to exploring the outer limits of creativity and technological innovation. With a passion for pushing boundaries, StellarCraft is committed to crafting solutions that transcend the ordinary. Our team of visionaries is driven by a mission to redefine industries through ingenious ideas and groundbreaking technologies.', '2023-12-18 18:05:39');
 
 -- --------------------------------------------------------
 
@@ -76,6 +87,13 @@ CREATE TABLE `ideation_phase` (
   `Submission_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ideation_phase`
+--
+
+INSERT INTO `ideation_phase` (`IdeationID`, `Project_ID`, `Project_logo`, `Project_Overview`, `Project_Modelcanvas`, `Submission_date`) VALUES
+(2, 27, 'images/INTERFACE COVER DESIGN.png', 'Description here', 'pdf/ASSIGNMENT-MODULE 7.pdf', '2023-12-19 20:57:09');
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +104,7 @@ CREATE TABLE `instructor_registration` (
   `Instructor_ID` int(11) NOT NULL,
   `Instructor_fname` varchar(100) NOT NULL,
   `Instructor_lname` varchar(100) NOT NULL,
+  `empID` varchar(255) NOT NULL,
   `Instructor_email` varchar(100) NOT NULL,
   `Instructor_password` varchar(255) NOT NULL,
   `Department` varchar(100) NOT NULL,
@@ -96,10 +115,11 @@ CREATE TABLE `instructor_registration` (
 -- Dumping data for table `instructor_registration`
 --
 
-INSERT INTO `instructor_registration` (`Instructor_ID`, `Instructor_fname`, `Instructor_lname`, `Instructor_email`, `Instructor_password`, `Department`, `Instructor_contactno`) VALUES
-(25, 'JC', 'Reyer', 'jc@psu.edu.ph', '12!@qwQW', 'College of Computing', '09123456789'),
-(26, 'cj', 'jc', 'cj@psu.edu.ph', '12qw!@QW', 'College of Architecture', '09523456789'),
-(27, 'Abc', 'Def', 'abc_def@psu.edu.ph', 'zxZX12!@', 'College of Engineering', '09123456789');
+INSERT INTO `instructor_registration` (`Instructor_ID`, `Instructor_fname`, `Instructor_lname`, `empID`, `Instructor_email`, `Instructor_password`, `Department`, `Instructor_contactno`) VALUES
+(25, 'JC', 'Reyer', '', 'jc@psu.edu.ph', '12!@qwQW', 'College of Computing', '09123456789'),
+(26, 'cj', 'jc', '', 'cj@psu.edu.ph', '12qw!@QW', 'College of Architecture', '09523456789'),
+(27, 'Abc', 'Def', '', 'abc_def@psu.edu.ph', 'zxZX12!@', 'College of Engineering', '09123456789'),
+(28, '1', '1', '1', 'cj1@psu.edu.ph', '12qw!@QW', 'College of Engineering and Architecture', '09123456789');
 
 -- --------------------------------------------------------
 
@@ -116,6 +136,19 @@ CREATE TABLE `investor_request` (
   `IdentityProof` varchar(255) NOT NULL,
   `RequestedDocuments` varchar(255) NOT NULL,
   `Submission_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invitation`
+--
+
+CREATE TABLE `invitation` (
+  `invitationID` int(11) NOT NULL,
+  `projectID` int(11) NOT NULL,
+  `invitee_studentID` varchar(255) NOT NULL,
+  `invitationDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -151,14 +184,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`Project_ID`, `Company_ID`, `Project_title`, `Project_Description`, `Project_date`) VALUES
-(1, 69, 'Smart Home Automation System', 'Developing an intelligent home automation system that utilizes IoT devices to enhance convenience and energy efficiency.', '2023-12-10 19:50:17'),
-(2, 69, 'Augmented Reality Campus Navigation', 'Implementing an augmented reality solution to help students navigate the campus easily, providing real-time directions and information.', '2023-12-10 19:55:20'),
-(3, 69, 'Eco-Friendly Waste Management System', 'Designing a waste management system focused on sustainability, promoting recycling, and reducing environmental impact.', '2023-12-10 19:55:20'),
-(4, 69, 'Virtual Health Assistant App', 'Creating a mobile application that serves as a virtual health assistant, providing users with personalized health tips and tracking features.', '2023-12-10 19:50:17'),
-(5, 69, 'AI-Powered Language Learning Platform', 'Building an artificial intelligence-driven language learning platform that adapts to users\' proficiency levels and learning styles for efficient language acquisition.', '2023-12-10 19:55:20'),
-(6, 69, 'Smart Agriculture Monitoring System', 'Developing a smart monitoring system for agriculture that integrates sensors and data analytics to optimize crop growth and resource utilization.', '2023-12-10 19:55:20'),
-(13, 69, 'Hello System', 'hello descp', '2023-12-11 07:09:02'),
-(14, 69, 'PapasaKa System', 'This system...', '2023-12-11 07:11:12');
+(27, 77, 'QuantumLeap Dashboard', 'The QuantumLeap Dashboard project by ByteBurst Tech is a cutting-edge data visualization tool designed to elevate business intelligence. Harness the power of quantum computing-inspired algorithms to process and interpret vast datasets with unprecedented speed and accuracy. The QuantumLeap Dashboard empowers decision-makers with real-time insights, enabling them to navigate complex data landscapes effortlessly. Revolutionize your analytics experience and take a leap into the future of data-driven decision-making with ByteBurst Tech\'s QuantumLeap Dashboard.', '2023-12-18 18:04:28'),
+(28, 78, 'CelestialHub', 'CelestialHub is an immersive virtual innovation expo curated by StellarCraft Innovations. Step into a digital realm where groundbreaking ideas converge, and innovation takes center stage. Explore the cosmos of creativity as StellarCraft showcases cutting-edge projects, disruptive technologies, and visionary concepts. CelestialHub invites you to witness the future, connecting minds across galaxies to shape the universe of innovation. Join us on this celestial journey, where inspiration knows no bounds.', '2023-12-18 18:08:24');
 
 -- --------------------------------------------------------
 
@@ -219,13 +246,20 @@ CREATE TABLE `student_registration` (
 --
 
 INSERT INTO `student_registration` (`Student_ID`, `Student_fname`, `Student_lname`, `Student_email`, `Student_password`, `Course`, `Year`, `Block`, `Student_contactno`) VALUES
-('21-UR-0123', 'Elijah', 'Vennise', '22ur2907@psu.edu.ph', '12qw!@QW', 'BS Information Technology', '2nd Year', 'D', '+639673845232'),
+('21-UR-0123', 'Elijah', 'Vennise', '21ur0123@psu.edu.ph', '12qw!@QW', 'BS Information Technology', '2nd Year', 'D', '+639673845232'),
+('21-UR-0245', 'Monica', 'Ave', 'mave_21UR0245@psu.edu.ph', '12!@qwQW', 'BS Computer Engineering', '5th Year', 'C', '+639573947421'),
 ('22-UR-0007', 'Allen James', 'Alvaro', '22ur0007@psu.edu.ph', '@Llen123', 'BS Information Technology', '3rd Year', 'A', '09123457890'),
 ('23-UR-0987', 'Patrick', 'Tomas', '23ur0987@psu.edu.ph', 'asAS12!@', 'BS Computer Engineering', '4th Year', 'D', '+639673845232');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `company_registration`
@@ -263,6 +297,14 @@ ALTER TABLE `instructor_registration`
 ALTER TABLE `investor_request`
   ADD PRIMARY KEY (`InvestorRequestID`),
   ADD KEY `Fk_investor` (`PublishedProjectID`);
+
+--
+-- Indexes for table `invitation`
+--
+ALTER TABLE `invitation`
+  ADD PRIMARY KEY (`invitationID`),
+  ADD KEY `projectID` (`projectID`),
+  ADD KEY `studentID` (`invitee_studentID`);
 
 --
 -- Indexes for table `pitching_phase`
@@ -313,10 +355,16 @@ ALTER TABLE `student_registration`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `company_registration`
 --
 ALTER TABLE `company_registration`
-  MODIFY `Company_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `Company_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `evaluation`
@@ -328,19 +376,25 @@ ALTER TABLE `evaluation`
 -- AUTO_INCREMENT for table `ideation_phase`
 --
 ALTER TABLE `ideation_phase`
-  MODIFY `IdeationID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdeationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `instructor_registration`
 --
 ALTER TABLE `instructor_registration`
-  MODIFY `Instructor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `Instructor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `investor_request`
 --
 ALTER TABLE `investor_request`
   MODIFY `InvestorRequestID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `invitation`
+--
+ALTER TABLE `invitation`
+  MODIFY `invitationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `pitching_phase`
@@ -352,7 +406,7 @@ ALTER TABLE `pitching_phase`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `Project_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Project_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `project_member`
@@ -400,6 +454,13 @@ ALTER TABLE `ideation_phase`
 --
 ALTER TABLE `investor_request`
   ADD CONSTRAINT `Fk_investor` FOREIGN KEY (`PublishedProjectID`) REFERENCES `published_project` (`PublishedProjectID`);
+
+--
+-- Constraints for table `invitation`
+--
+ALTER TABLE `invitation`
+  ADD CONSTRAINT `invitation_ibfk_1` FOREIGN KEY (`projectID`) REFERENCES `project` (`Project_ID`),
+  ADD CONSTRAINT `invitation_ibfk_2` FOREIGN KEY (`invitee_studentID`) REFERENCES `student_registration` (`Student_ID`);
 
 --
 -- Constraints for table `pitching_phase`

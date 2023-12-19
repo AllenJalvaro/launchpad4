@@ -43,7 +43,7 @@ $category;
 $resultTitles;
 $boxshaa;
 $categBG = "transparent";
-$heightt = "600px";
+$heightt = "700px";
 
 if (isset($_POST['submitG'])) {
 
@@ -428,6 +428,7 @@ if (isset($_POST['submitG'])) {
     <div class="content">
         <div>
             <h1>Startup Project Idea Checker</h1>
+            <p>This will assess your project idea's uniqueness and help you make the best out of it.</p><br>
         </div>
         <div>
             <form action="" method="post">
