@@ -365,8 +365,8 @@ if (isset($_POST['btnPitch'])) {
             }
 
             ?>
-            
-            <a href="company_view.php">&larr; Back</a>
+                            <!-- echo the company id here -->
+            <a href="company_view.php?Company_id=<?php echo $_SESSION['copid']; ?>">&larr; Back</a>
             <h1 style="margin: 8px;"><?php echo $project_name ?></h1><hr>
 
 

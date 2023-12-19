@@ -34,7 +34,7 @@ if ($hasCompany) {
 require __DIR__ . '/vendor/autoload.php';
 use Orhanerday\OpenAi\OpenAi;
 
-$open_ai_key = "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";
+$open_ai_key = "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";
 $open_ai = new OpenAi($open_ai_key);
 $projectTitle;
 $response;
@@ -64,8 +64,8 @@ if (isset($_POST['submitG'])) {
     $complete = $open_ai->completion([
         'model' => 'text-davinci-003',
         'prompt' => <<<EOT
+        The only response you will always display is the PERCENTAGE ONLY, then the explanation. NOTHING ELSE.
     If the project idea is similar to other applications or systems, frankly say it in the explanation and give low percentage.
-    The only response you will always display is the PERCENTAGE ONLY, then the explanation. NOTHING ELSE.
     If the same prompt provide like earlier, do not change your response especially the percentage.
     Scan and assess how unique the startup project idea is among all the existing systems, applications, or startup projects on the web.
     Do not be biased, be frank. Be honest whether it is common or unique.
@@ -176,13 +176,15 @@ if (isset($_POST['submitG'])) {
         } else {
             
             $percentage = "N/A";
-            $response = "Unable to retrieve response.";
+            $category = "For better assistance, please provide more context. Thank you!";
+            $response = "The title and description of this startup project are too vague and do not provide enough context. More detailed information is required to provide an accurate assessment.";
         }
 
 
 
     } else {
-        $response = "Unable to retrieve response.";
+        $category = "For better assistance, please provide more context. Thank you!";
+        $response = "The title and description of this startup project are too vague and do not provide enough context. More detailed information is required to provide an accurate assessment.";
     }
 
 
@@ -281,7 +283,6 @@ if (isset($_POST['submitG'])) {
 
 
         .output-text {
-            background-color: white;
             border-radius: 20px;
             padding: 20px;
         }
@@ -307,7 +308,6 @@ if (isset($_POST['submitG'])) {
 
         .output-titles {
             text-align: left;
-            background-color: white;
             border-radius: 20px;
             padding: 20px;
             white-space: break-spaces;
@@ -465,6 +465,7 @@ if (isset($_POST['submitG'])) {
             <div class="output-text">
                 <?php if (isset($response))
                     echo "$response"; ?>
+
             </div><br>
             <div class="output-titles">
                 <span>

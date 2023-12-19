@@ -21,7 +21,29 @@
     gap: 20px;
 }
 
+/* .project-card {
+    margin: 0;
+    flex: 0 0 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+} 
+*/
 .project-card {
+    position: relative;
     margin: 0;
     flex: 0 0 calc(33.33% - 20px);
     max-width: calc(33.33% - 20px);
@@ -36,11 +58,25 @@
     text-decoration: none;
     color: #333; /* Default text color */
     text-align: center;
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
+.status-badge {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    padding: 8px !important;
+    background-color: rgba(255, 0, 0, 0.16) !important; 
+    color: #b91313 !important;
+    border-radius: 8px !important;
+    font-size: 10px !important;
+    font-weight: bold !important;
+}
+
+
+
 
 .project-card2 {
     background-color: var(--pblue-color);

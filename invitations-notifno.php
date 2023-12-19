@@ -5,7 +5,7 @@ require 'config.php';
 $userEmail = $_SESSION['email'];
 
 // Use prepared statement to prevent SQL injection
-$notifquery = "SELECT * FROM invitation, student_registration WHERE invitation.invitee_studentid = student_registration.student_id AND student_email = ?";
+$notifquery = "SELECT * FROM invitation, student_registration WHERE invitation.inviteeid = student_registration.student_id AND student_email = ?";
 $stmt = mysqli_prepare($conn, $notifquery);
 
 if ($stmt) {

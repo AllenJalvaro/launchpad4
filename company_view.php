@@ -45,6 +45,8 @@
 
     $projectQuery = "SELECT * FROM project WHERE Company_ID = '$selectedCompanyID' ORDER BY Project_date DESC";
     $resultProjects = mysqli_query($conn, $projectQuery);
+    $copid = $_GET['Company_id'];
+    $_SESSION['copid'] = $copid; 
     ?>
 
     <!DOCTYPE html>
@@ -178,7 +180,8 @@
                            <h1><?php echo $companyName ?>'s projects </h1>
                        </div>
                 <div class="content">
-                <a href="create-project.php?Company_id=<?php echo $_GET['Company_id']; ?>" class="project-card2">        
+                <a href="create-project.php?Company_id=<?php echo $_GET['Company_id']; ?>" class="project-card2">   
+                  
         
             <br><br>
             <img src="images/add-company-icon.png" alt="add-icon" width="30px">
@@ -186,13 +189,15 @@
         </a>
 
         <?php while ($row = mysqli_fetch_assoc($resultProjects)) : ?>
-            <a href="project.php?project_id=<?php echo $row['Project_ID']; ?>" class="project-card">
-                <div>
-                    <div class="project-title"><?php echo $row['Project_title']; ?></div>
-                    <div class="project-date">Date created: <?php echo date('m-d-y g:i A', strtotime($row['Project_date'])); ?></div>
-                </div>
-            </a>
-        <?php endwhile; ?>
+    <a href="project.php?project_id=<?php echo $row['Project_ID']; ?>" class="project-card">
+        <div class="status-badge">Phase 1 on progress</div>
+        <div>
+            <div class="project-title"><?php echo $row['Project_title']; ?></div>
+            <div class="project-date">Date created: <?php echo date('m-d-y g:i A', strtotime($row['Project_date'])); ?></div>
+        </div>
+    </a>
+<?php endwhile; ?>
+
         <script>
    $(document).ready(function() {
     // Store the original content

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2023 at 02:37 PM
+-- Generation Time: Dec 19, 2023 at 04:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -92,7 +92,8 @@ CREATE TABLE `ideation_phase` (
 --
 
 INSERT INTO `ideation_phase` (`IdeationID`, `Project_ID`, `Project_logo`, `Project_Overview`, `Project_Modelcanvas`, `Submission_date`) VALUES
-(2, 27, 'images/INTERFACE COVER DESIGN.png', 'Description here', 'pdf/ASSIGNMENT-MODULE 7.pdf', '2023-12-19 20:57:09');
+(3, 27, 'images/657e4a963eb86.jpg', 'Hello', 'pdf/Chapter 7 - Hypothesis Testing.pdf', '2023-12-19 21:42:04'),
+(4, 28, 'images/Screenshot 2023-12-15 222049.png', 'AHHA', 'pdf/Final-Final-version-5-Executive-after-intro.pdf', '2023-12-19 21:45:17');
 
 -- --------------------------------------------------------
 
@@ -145,10 +146,12 @@ CREATE TABLE `investor_request` (
 --
 
 CREATE TABLE `invitation` (
-  `invitationID` int(11) NOT NULL,
-  `projectID` int(11) NOT NULL,
-  `invitee_studentID` varchar(255) NOT NULL,
-  `invitationDate` datetime NOT NULL DEFAULT current_timestamp()
+  `InvitationID` int(11) NOT NULL,
+  `ProjectID` int(11) DEFAULT NULL,
+  `InviterID` varchar(50) DEFAULT NULL,
+  `InviteeID` varchar(50) DEFAULT NULL,
+  `Status` varchar(50) DEFAULT 'Pending',
+  `InvitationDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -302,9 +305,10 @@ ALTER TABLE `investor_request`
 -- Indexes for table `invitation`
 --
 ALTER TABLE `invitation`
-  ADD PRIMARY KEY (`invitationID`),
-  ADD KEY `projectID` (`projectID`),
-  ADD KEY `studentID` (`invitee_studentID`);
+  ADD PRIMARY KEY (`InvitationID`),
+  ADD KEY `ProjectID` (`ProjectID`),
+  ADD KEY `InviterID` (`InviterID`),
+  ADD KEY `InviteeID` (`InviteeID`);
 
 --
 -- Indexes for table `pitching_phase`
@@ -376,7 +380,7 @@ ALTER TABLE `evaluation`
 -- AUTO_INCREMENT for table `ideation_phase`
 --
 ALTER TABLE `ideation_phase`
-  MODIFY `IdeationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IdeationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `instructor_registration`
@@ -389,12 +393,6 @@ ALTER TABLE `instructor_registration`
 --
 ALTER TABLE `investor_request`
   MODIFY `InvestorRequestID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `invitation`
---
-ALTER TABLE `invitation`
-  MODIFY `invitationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `pitching_phase`
@@ -459,8 +457,9 @@ ALTER TABLE `investor_request`
 -- Constraints for table `invitation`
 --
 ALTER TABLE `invitation`
-  ADD CONSTRAINT `invitation_ibfk_1` FOREIGN KEY (`projectID`) REFERENCES `project` (`Project_ID`),
-  ADD CONSTRAINT `invitation_ibfk_2` FOREIGN KEY (`invitee_studentID`) REFERENCES `student_registration` (`Student_ID`);
+  ADD CONSTRAINT `invitation_ibfk_1` FOREIGN KEY (`ProjectID`) REFERENCES `project` (`Project_ID`),
+  ADD CONSTRAINT `invitation_ibfk_2` FOREIGN KEY (`InviterID`) REFERENCES `student_registration` (`Student_ID`),
+  ADD CONSTRAINT `invitation_ibfk_3` FOREIGN KEY (`InviteeID`) REFERENCES `student_registration` (`Student_ID`);
 
 --
 -- Constraints for table `pitching_phase`

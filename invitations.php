@@ -181,7 +181,7 @@ if ($hasCompany) {
             invitation.invitationDate 
           FROM invitation
           INNER JOIN project ON invitation.projectID = project.Project_ID 
-          INNER JOIN student_registration ON invitation.invitee_studentID = student_registration.Student_ID 
+          INNER JOIN student_registration ON invitation.inviteeID = student_registration.Student_ID 
           INNER JOIN company_registration ON project.Company_ID = company_registration.Company_ID
           INNER JOIN student_registration AS owner ON company_registration.Student_ID = owner.Student_ID where student_registration.student_email = '$userEmail'
           ORDER BY invitation.invitationDate DESC";
