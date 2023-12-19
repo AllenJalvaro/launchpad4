@@ -171,7 +171,6 @@ if (isset($_POST['btnPitch'])) {
         
     <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f4f4f4;
@@ -214,7 +213,7 @@ if (isset($_POST['btnPitch'])) {
             flex: 1;
             text-align: center;
             color: #aaa;
-            font-size: 11px;
+            font-size: 15px;
             cursor: pointer;
             font-weight: 700;
             position: relative;
@@ -234,7 +233,7 @@ if (isset($_POST['btnPitch'])) {
         }
 
         label {
-            font-size: 14px;
+            font-size: 24px;
             font-weight: 700;
         }
 
