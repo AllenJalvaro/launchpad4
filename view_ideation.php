@@ -66,7 +66,7 @@
             <a href="evaluation.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'evaluation.php') ? 'active' : ''; ?>">
                 <button>
                     <span>
-                        <i><img src="\launchpad\images\evaluation_img.png" alt="evaluation-logo" class="logo-ic"></i>
+                        <i><img src="\launchpad\images\evaluation-img.png" alt="evaluation-logo" class="logo-ic"></i>
                         <span>Evaluation</span>
                     </span>
                 </button>
@@ -92,7 +92,7 @@
         $ideationID = mysqli_real_escape_string($conn, $_GET['ideation_id']);
 
         // SQL query to retrieve ideation details
-        $sql = "SELECT * FROM ideation_phase WHERE IdeationID = '$ideationID'";
+        $sql = "SELECT ideation_phase.*, project_title FROM ideation_phase, project WHERE IdeationID = '$ideationID' and ideation_phase.project_id = project.project_id";
         $result = $conn->query($sql);
 
         // Check if Project_logo is not empty and exists
@@ -101,18 +101,18 @@
             $ideation = $result->fetch_assoc();
             echo '<div class="card container-fluid">';
             echo '<h2 class="mb-4">Ideation Phase Details</h2>';
-            echo "<p><strong>Project ID:</strong> " . (isset($ideation['Project_ID']) ? $ideation['Project_ID'] : 'N/A') . "</p>";
+            echo "<p><strong>Project Title:</strong> " . (isset($ideation['project_title']) ? $ideation['project_title'] : 'N/A') . "</p>";
 
             // Specify the path to the "images" folder
-            $imagePath = 'images/logo/' . (isset($ideation['Project_logo']) ? $ideation['Project_logo'] : '');
+            $imagePath = '\launchpad\images\\' . (isset($ideation['Project_logo']) ? $ideation['Project_logo'] : '');
 
             // Check if Project_logo is not empty and exists
-            if (!empty($ideation['Project_logo']) && file_exists($imagePath)) {
+            // if (!empty($ideation['Project_logo']) && file_exists($imagePath)) {
                 // Display the image using an <img> tag
-                echo '<img src="' . $imagePath . '" alt="Project Logo">';
-            } else {
-                echo '<p>Image not found or invalid path.</p>';
-            }
+                echo '<img src="\launchpad\images\657e4a963eb86.jpg" alt="Project Logo" width="100px" height="100px">';
+            // } else {
+                // echo '<p>Image not found or invalid path.</p>';
+            // }
 
             echo "<div class='card-content'>";
             echo "<p><strong>Project Overview:</strong> " . (isset($ideation['Project_Overview']) ? $ideation['Project_Overview'] : 'N/A') . "</p>";

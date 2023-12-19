@@ -6,6 +6,14 @@
         exit(); 
     }
     $instructorEmail = $_SESSION["email"];
+    $query = "SELECT instructor_fname from instructor_registration where instructor_email='$instructorEmail'";
+    $result = mysqli_query($conn, $query);
+    $fname;
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $fname = $row['instructor_fname'];
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -62,13 +70,13 @@
         <a href="evaluation.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'evaluation.php') ? 'active' : ''; ?>">
             <button>
                 <span>
-                    <i><img src="\launchpad\images\evaluation_img.png" alt="evaluation-logo" class="logo-ic"></i>
+                    <i><img src="\launchpad\images\evaluation-img.png" alt="evaluation-logo" class="logo-ic"></i>
                     <span>Evaluation</span>
                 </span>
             </button>
         </a>
             <br><br><br><br><p>My companies</p>
-            <a href="">
+            <a href="logout.php">
                 <button>
                     <span>
                         <?php
@@ -90,8 +98,8 @@
 
     <div class="content">
         
-        <h2>Welcome to the Instructor Dashboard - Home Section</h2>
-        <p>This is where you can manage your home content.</p>
+        <h2>Welcome Mentor <?php echo $fname ?>!</h2>
+        <p>This is where you can manage your home content.</p><br><br>
 
         <div class="row">
             <?php

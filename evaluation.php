@@ -47,7 +47,7 @@
         <a href="evaluation.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'evaluation.php') ? 'active' : ''; ?>">
             <button>
                 <span>
-                    <i><img src="\launchpad\images\evaluation_img.png" alt="evaluation-logo" class="logo-ic"></i>
+                    <i><img src="\launchpad\images\evaluation-img.png" alt="evaluation-logo" class="logo-ic"></i>
                     <span>Evaluation</span>
                 </span>
             </button>
