@@ -92,6 +92,7 @@ if (isset($_POST["submitStudent"])) {
         }
     }
 } elseif (isset($_POST["submitTeacher"])) {
+    $empID = $_POST["empID"];
     $temail = $_POST["temail"];
     $tfirstname = $_POST["tfirstname"];
     $tlastname = $_POST["tlastname"];
@@ -115,8 +116,8 @@ if (isset($_POST["submitStudent"])) {
         });
       </script>";
     } else {
-        $query = "INSERT INTO instructor_registration (Instructor_fname, Instructor_lname, Instructor_email, Instructor_password, Department, Instructor_contactno) 
-                  VALUES ('$tfirstname', '$tlastname', '$temail', '$tpassword', '$department', '$tcontactno')";
+        $query = "INSERT INTO instructor_registration (Instructor_fname, Instructor_lname, empID, Instructor_email, Instructor_password, Department, Instructor_contactno) 
+                  VALUES ('$tfirstname', '$tlastname', '$empID', '$temail', '$tpassword', '$department', '$tcontactno')";
 
         if (mysqli_query($conn, $query)) {
             echo "<script>
@@ -164,7 +165,7 @@ if (isset($_POST["submitStudent"])) {
                 <input type="text" placeholder="First Name" id="firstname" name="firstname" required class="fullname"/>
                 <input type="text" placeholder="Last Name" name="lastname" required class="fullname"/>
             </div>
-            <label for="course">Course</label>
+            <label for="course">Program:</label>
             <select id="course" name="course" required>
                 <option value="BS Information Technology">BS Information Technology</option>
             <option value="BS Civil Engineering">BS Civil Engineering</option>
@@ -230,6 +231,9 @@ if (isset($_POST["submitStudent"])) {
         </form>
 
         <form id="teacherForm" class="student-register-form" action="" method="post">
+        <label for="empID">Employee ID (Format: URDA-0000)</label>
+            <input type="text" placeholder="Employee ID (e.g., URDA-0123sharp)" id="empID" name="empID" required/>
+            <h6 id="terror-empID" style="color: red; text-align: left; margin:0px"></h6>
             <label for="temail">Email</label>
             <input type="email" placeholder="Email" id="temail" name="temail" required/>
             <h6 id="terror-email" style="color: red; text-align: left; margin:0px"></h6>
@@ -241,9 +245,8 @@ if (isset($_POST["submitStudent"])) {
             <label for="department">Department</label>
             <select id="department" name="department" required>
             <option value="College of Computing">College of Computing</option>
-                <option value="College of Engineering">College of Engineering</option>
-                <option value="College of Architecture">College of Architecture</option>
-                <option value="College of Education">College of Education</option>
+                <option value="College of Engineering and Architecture">College of Engineering and Architecture</option>
+                <option value="College of Arts and Education">College of Arts and Education</option>
             
             </select>
             <label for="tcontactno">Contact Number</label>

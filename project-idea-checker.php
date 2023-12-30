@@ -34,7 +34,7 @@ if ($hasCompany) {
 require __DIR__ . '/vendor/autoload.php';
 use Orhanerday\OpenAi\OpenAi;
 
-$open_ai_key = "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";
+$open_ai_key = "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";
 $open_ai = new OpenAi($open_ai_key);
 $projectTitle;
 $response;

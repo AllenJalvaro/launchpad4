@@ -46,6 +46,15 @@
             margin-top: 15px;
         }
     </style>
+    <style media="screen">
+      embed{
+        border: 2px solid black;
+        margin-top: 30px;
+      }
+      .div1{
+        margin-left: 170px;
+      }
+    </style>
 </head>
 <body>
     <aside class="sidebar">
@@ -125,6 +134,24 @@
 
             echo '</div>'; // End of card-content
             echo '</div>'; // End of card
+            ?>
+            <div class="div1">
+            <?php
+
+            $sql = "SELECT * FROM ideation_phase";
+            $query = mysqli_query($conn, $sql);
+
+            while ($row = mysqli_fetch_array($query)) {
+            ?>
+                <embed type="application/pdf" src="<?php echo $row['Project_Modelcanvas']; ?>" width="800" height="500">
+            <?php
+            }
+            mysqli_free_result($query);
+
+            mysqli_close($conn);
+            ?>
+        </div>
+        <?php
         } else {
             echo '<p>Ideation phase not found.</p>';
         }
